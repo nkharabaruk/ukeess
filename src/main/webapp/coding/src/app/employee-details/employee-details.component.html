@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="col-md-5">
+    <form name="employeeForm">
+
+      <table class="table">
+        <tbody *ngIf="!!employee">
+        <tr>
+          <td>empName</td>
+          <td><input name="empName" type="text" [(ngModel)]="employee.empName" [disabled]="!isEdit"></td>
+        </tr>
+        <tr>
+          <td>empActive</td>
+          <td><input name="empActive" type="checkbox" [(ngModel)]="employee.empActive" [disabled]="!isEdit"></td>
+        </tr>
+        <tr>
+          <td>empDepartment</td>
+          <td>
+            <select name="emp_dpID" [(ngModel)]="emp_dpID" [disabled]="!isEdit">
+              <option *ngFor="let dep of departments" [value]="dep.dpID">{{dep.dpName}}</option>
+            </select>
+        </tr>
+        <tr>
+
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <div class="btn-toolbar" role="toolbar">
+            <button type="button" class="btn btn-success" *ngIf="isEdit" (click)="save()">
+              Save
+            </button>
+            <button type="button" class="btn btn-danger" (click)="backClicked()">
+              Cancel
+            </button>
+          </div>
+        </tr>
+        </tfoot>
+      </table>
+    </form>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

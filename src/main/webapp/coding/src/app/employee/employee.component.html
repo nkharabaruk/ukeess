@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-3">
+        <input type="search" class="form-control" placeholder="Search" [(ngModel)]="search">
+      </div>
+      <button type="submit" class="btn btn-default"  (click)="getPage(0)">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        Search
+      </button>
+    </div>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>empID</th>
+      <th>empName</th>
+      <th>empActive</th>
+      <th>empDepartment</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of employees">
+      <td><a routerLink="{{employee.id}}/view">View</a></td>
+      <td><a routerLink="{{employee.id}}/edit">Edit</a></td>
+      <td>{{employee.id}}</td>
+      <td>{{employee.empName}}</td>
+      <td>{{!!employee.empActive}}</td>
+      <td>{{employee.emp_dpID ? employee.emp_dpID.dpName : ''}}</td>
+      <td><a (click)="delete(employee.id)" style="cursor: pointer">Delete</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="container" style="margin: auto">
+    <div class="btn-toolbar" role="toolbar">
+      <button type="button" class="btn btn-default" [disabled]="first" (click)="getPage(0)">
+        <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="btn btn-default" [disabled]="first" (click)="getPage(pageNumber - 1)">
+        <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+      </button>
+      <div class="btn-group" role="group">
+        <button *ngFor="let number of pageNumbers" type="button" class="btn btn-default"
+                (click)="getPage(number)"
+                [disabled]="pageNumber === number ">{{number+1}}
+        </button>
+      </div>
+      <button type="button" class="btn btn-default" [disabled]="last" (click)="getPage(pageNumber + 1)">
+        <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="btn btn-default" [disabled]="last" (click)="getPage(pageNumbers.length - 1)">
+        <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+
